@@ -1,5 +1,5 @@
 const express = require("express");
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectID } = require("mongodb");
 const app = express();
 const path = require("path")
 
@@ -33,7 +33,7 @@ app.get("/api/", function(req, res){
 
 app.get("/api/:placeId",function(req, res) {
   const requestedplaceId  = req.params.placeId;
-  const query = {}; //{Place: requestedplaceId};
+  const query = {'_id': new ObjectID(requestedplaceId)};
 
   const promise = db.collection("Item").findOne(query);
   promise.then(item => {

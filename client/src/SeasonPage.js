@@ -9,7 +9,7 @@ export default class SeasonPage extends Component {
 
   componentDidMount = () => {
     axios.get(`/api/${this.props.id}`).then((resp) => {
-      // console.log(resp);
+      console.log(resp);
       this.setState({
         data: resp.data
       })
@@ -21,10 +21,11 @@ export default class SeasonPage extends Component {
     if (!Vid) {
       return null;
     }
+    console.log(Vid);
     return (<div>
     <div className="video-background">
       <div className="video-foreground">
-        <iframe id="video" title="video" src={ `https://www.youtube.com/embed/${Vid}?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&playlist=${Vid}` } frameBorder="0" allowFullScreen />
+        <iframe id="video" title="video" src={ `https://www.youtube.com/embed/${Vid}?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&start=30&playlist=${Vid}` } frameBorder="0" allow="autoplay; fullscreen"/>
       </div>
     </div>
     <div id="vidtop-content">
