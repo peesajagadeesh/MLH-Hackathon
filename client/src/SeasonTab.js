@@ -21,7 +21,7 @@ export default class SeasonTab extends Component {
                   <button type="button" className="btn btn-sm btn-outline-secondary">Teleport</button>
                 </Link>
               </div>
-              <small className="text-muted">9 mins</small>
+              {/* <small className="text-muted">9 mins</small> */}
             </div>
           </div>
         </div>
