@@ -42,8 +42,8 @@ app.get("/api/:placeId",function(req, res) {
   }).catch(err => console.log(err))
 });
 
-app.listen(3000,function(){
+app.use('/ui', express.static(path.resolve(__dirname, '../client/build')))
+
+app.listen(process.env.PORT || 3000,function(){
   console.log("Server started on port 3000");
 });
-
-app.use('/ui', express.static(path.resolve(__dirname, '../client/build')))
