@@ -28,7 +28,7 @@ app.get("/", function(req, res){
   db.collection("Item").find(query).toArray(function(err, result) {
     if (err) throw err;
     console.log(result);
-    res.render("home",{Places: result});
+    res.json(result);
   });
 });
 
@@ -39,7 +39,7 @@ app.get("/:placeId",function(req, res) {
   const promise = db.collection("Item").findOne(query);
   promise.then(item => {
     console.log(item);
-    res.render("template",{ title:item.Place, Link:item.Link })
+    res.json(item);
   }).catch(err => console.log(err))
 });
 
