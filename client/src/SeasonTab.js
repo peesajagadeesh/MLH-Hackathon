@@ -5,7 +5,6 @@ export default class SeasonTab extends Component {
 
   render() {
     const imgSrc = `https://img.youtube.com/vi/${this.props.data.Vid}/hqdefault.jpg`;
-    console.log(imgSrc);
     return (
       <div className="col-md-4">
         <div className="card mb-4 shadow-sm">
@@ -18,7 +17,7 @@ export default class SeasonTab extends Component {
             <p className="card-text">{this.props.data.Place}</p>
             <div className="d-flex justify-content-between align-items-center">
               <div className="btn-group">
-                <Link to={ `/${this.props.data._id}` }>
+                <Link to={ `/ui/${this.props.data._id}` }>
                   <button type="button" className="btn btn-sm btn-outline-secondary">Teleport</button>
                 </Link>
               </div>

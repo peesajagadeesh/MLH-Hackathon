@@ -4,7 +4,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import './App.scss';
+import './App.css';
 import Seasons from './Seasons';
 import SeasonPage from './SeasonPage';
 
