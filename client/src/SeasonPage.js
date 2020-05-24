@@ -18,6 +18,12 @@ export default class SeasonPage extends Component {
     });
   }
 
+  buttonOnClick = () =>{
+    this.setState(prev => ({
+      mute : !prev.mute
+    }))
+  }
+
   render() {
     const Vid = this.state.data.Vid;
     if (!Vid) {
@@ -46,9 +52,9 @@ export default class SeasonPage extends Component {
       </div>
     </div>
     <div id="vidtop-content">
-      <div className="vid-info">
+      <div className="vid-info d-flex flex-row justify-content-center">
         <h1>{this.state.data.Place}</h1>
-        {/* <button type="button" className="btn btn-sm btn-outline-secondary">Mute</button> */}
+        <button type="button" className={ `btn ${this.state.mute ? 'btn-light' : 'btn-outline-light'} ml-3` } onClick={this.buttonOnClick}>Mute</button>
       </div>
     </div>
     </div>);
