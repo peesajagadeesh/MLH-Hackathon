@@ -12,10 +12,10 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/ui">
           <Seasons />
         </Route>
-        <Route path="/:id" render={routeProps => <SeasonPage id={routeProps.match.params.id} /> }/>
+        <Route path="/ui/:id" render={routeProps => <SeasonPage id={routeProps.match.params.id} /> }/>
       </Switch>
     </Router>
   );
