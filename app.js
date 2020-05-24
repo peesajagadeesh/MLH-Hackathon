@@ -79,24 +79,28 @@ app.get("/", function(req,res){
 //     console.log(foundItems);
 //     if (!err){
 res.render("home",{Places: result});
-//   }
-//   else {
-//     console.log(err);
-//   }
-//
+/
+});
+});
+// app.post("/",function(req,res){
+//   const
 // })
-});
-});
-
 
 app.get("/:placeId",function(req,res) {
   const requestedplaceId  = req.params.placeId;
+  var query1 = {Place: requestedplaceId};
 
-  Item.findOne({Place : requestedplaceId},function(err,item){
-    res.render("template",{title:item.Place,
-    Link:item.Link })
-  })
+  db.collection("Item").findOne(query).toArray(function(err, result1) {
+    if (err) throw err;
+    console.log(result1);
+
+
+  // Item.findOne({Place : requestedplaceId},function(err,item){
+    res.render("template",{title:result1.Place,
+    Link:result1.Link })
+  // })
 })
+});
 
 
 var server = app.listen(3000,function(){
