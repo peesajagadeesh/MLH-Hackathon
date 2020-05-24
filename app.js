@@ -13,37 +13,26 @@ const url = "mongodb+srv://admin-jagadeesh:Test123@cluster0-nykac.mongodb.net/ml
 const client = new MongoClient(url);
 
 
-// mongoose.connect("mongodb+srv://admin-jagadeesh:Test123@cluster0-nykac.mongodb.net/mlhDB",{useNewUrlParser: true});
-// mongoose.set("useCreateIndex", true);
-
-const mlhDBSchema= {
-  Place : String,
-  Link : String
-};
-
-const Item = mongoose.model("Item",mlhDBSchema);
-//mlhDBSchema.plugin(find);
-
    // The database to use
    const dbName = "mlhDB";
+    let db;
+
+
+   // async function getele() {
+   // await client.connect();
+   // console.log("Connected correctly to server");
+   // const db = client.db(dbName);
 
    async function run() {
       try {
            await client.connect();
            console.log("Connected correctly to server");
-           const db = client.db(dbName);
+             db = client.db(dbName);
 
            // Use the collection "people"
            const col = db.collection("Item");
 
-           // Construct a document
-           // let personDocument = {
-           //     "name": { "first": "Alan", "last": "Turing" },
-           //     "birth": new Date(1912, 5, 23), // June 23, 1912
-           //     "death": new Date(1954, 5, 7),  // June 7, 1954
-           //     "contribs": [ "Turing machine", "Turing test", "Turingery" ],
-           //     "views": 1250000
-           // }
+
            let WinterObject=
              {
                Place: "Winter",
@@ -67,9 +56,9 @@ const Item = mongoose.model("Item",mlhDBSchema);
            console.log(err.stack);
        }
 
-       finally {
-          await client.close();
-      }
+      //  finally {
+      //     await client.close();
+      // }
   }
 
   run().catch(console.dir);
@@ -77,22 +66,27 @@ const Item = mongoose.model("Item",mlhDBSchema);
 
 // Item.insertOne(WinterObject);
 // Item.insertMany(SummerrObject);
+var query = { };
+
+
 app.get("/", function(req,res){
-  console.log("2");
-  Item.find({},function(err,foundItems){
-    console.log("1");
-    console.log(foundItems);
-    if (!err){
-    res.render("home",{Places :foundItems});
-  }
-  else {
-    console.log(err);
-  }
-
-})
-
+    console.log("2");
+  db.collection("Item").find(query).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+//   Item.find({},function(err,foundItems){
+//     console.log("1");
+//     console.log(foundItems);
+//     if (!err){
+res.render("home",{Places: result});
+//   }
+//   else {
+//     console.log(err);
+//   }
+//
+// })
 });
-
+});
 
 
 app.get("/:placeId",function(req,res) {
@@ -105,11 +99,13 @@ app.get("/:placeId",function(req,res) {
 })
 
 
-app.listen(3000,function(){
+var server = app.listen(3000,function(){
   console.log("Server started on port 3000");
 });
 
-
+// server.close(function(){
+//   client.close();
+// })
 
 
 
