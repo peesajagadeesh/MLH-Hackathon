@@ -1,6 +1,7 @@
 const express = require("express");
 const { MongoClient } = require("mongodb");
 const app = express();
+const path = require("path")
 
 app.set('view engine','ejs');
 
@@ -21,7 +22,7 @@ async function run() {
 run().catch(console.dir);
 
 
-app.get("/", function(req, res){
+app.get("/api/", function(req, res){
   const query = {};
   db.collection("Item").find(query).toArray(function(err, result) {
     if (err) throw err;
@@ -30,7 +31,7 @@ app.get("/", function(req, res){
   });
 });
 
-app.get("/:placeId",function(req, res) {
+app.get("/api/:placeId",function(req, res) {
   const requestedplaceId  = req.params.placeId;
   const query = {}; //{Place: requestedplaceId};
 
@@ -45,3 +46,4 @@ app.listen(3000,function(){
   console.log("Server started on port 3000");
 });
 
+app.use('/ui', express.static(path.resolve(__dirname, '../client/build')))
